@@ -1,69 +1,56 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+main() => runApp(const QuestionsApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class QuestionsAppState extends State<QuestionsApp> {
+  var questionSelected = 0;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  void returnAnswer() {
     setState(() {
-      _counter++;
+      questionSelected++;
     });
+    // ignore: avoid_print
+    print('question answered!');
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<String> questions = [
+      'What do you favorite color?',
+      'What do you favorite animal?',
+    ];
 
-    return Scaffold(
+    return MaterialApp(
+        home: Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Center(child: Text('Questions')),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '${_counter}',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          Text(questions[questionSelected]),
+          ElevatedButton(
+            onPressed: returnAnswer,
+            child: const Text('Answer 1'),
+          ),
+          ElevatedButton(
+            onPressed: () => print(''),
+            child: const Text('Answer 2'),
+          ),
+          ElevatedButton(
+            onPressed: returnAnswer,
+            child: const Text('Answer 3'),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    ));
+  }
+}
+
+class QuestionsApp extends StatefulWidget {
+  const QuestionsApp({super.key});
+
+  @override
+  QuestionsAppState createState() {
+    return QuestionsAppState();
   }
 }
