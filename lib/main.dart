@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 
 main() => runApp(const QuestionsApp());
 
-class QuestionsApp extends StatelessWidget {
-  const QuestionsApp({super.key});
+class QuestionsAppState extends State<QuestionsApp> {
+  var questionSelected = 0;
+
+  void returnAnswer() {
+    setState(() {
+      questionSelected++;
+    });
+    // ignore: avoid_print
+    print('question answered!');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,27 +22,35 @@ class QuestionsApp extends StatelessWidget {
 
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: const Center(child: Text('Questions')),
+      appBar: AppBar(
+        title: const Center(child: Text('Questions')),
+      ),
+      body: Column(
+        children: <Widget>[
+          Text(questions[questionSelected]),
+          ElevatedButton(
+            onPressed: returnAnswer,
+            child: const Text('Answer 1'),
           ),
-          body: Column(
-            children: [
-              Text(questions.elementAt(0)),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Answer 1'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Answer 2'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Answer 3'),
-              ),
-            ],
+          ElevatedButton(
+            onPressed: () => print(''),
+            child: const Text('Answer 2'),
           ),
-        )
-      );
+          ElevatedButton(
+            onPressed: returnAnswer,
+            child: const Text('Answer 3'),
+          ),
+        ],
+      ),
+    ));
+  }
+}
+
+class QuestionsApp extends StatefulWidget {
+  const QuestionsApp({super.key});
+
+  @override
+  QuestionsAppState createState() {
+    return QuestionsAppState();
   }
 }
