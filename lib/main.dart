@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_questions/answer.dart';
 import './question.dart';
 
 main() => runApp(const QuestionsApp());
@@ -10,15 +11,23 @@ class QuestionsAppState extends State<QuestionsApp> {
     setState(() {
       questionSelected++;
     });
-    // ignore: avoid_print
-    print('question answered!');
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> questions = [
-      'What do you favorite color?',
-      'What do you favorite animal?',
+    final List<Map<String, Object>> questions = [
+      {
+        'text': 'What do you favorite color?',
+        'answer': ['Black', 'Red', 'Blue', 'Yellow'],
+      },
+      {
+        'text': 'What do you favorite animal?',
+        'answer': ['Fish', 'Rabit', 'Bat', 'Chicken'],
+      },
+      {
+        'text': 'What do you favorite Film?',
+        'answer': ['Jaws', 'Memento', 'The Godfather', 'Home Alone'],
+      },
     ];
 
     return MaterialApp(
@@ -28,18 +37,18 @@ class QuestionsAppState extends State<QuestionsApp> {
       ),
       body: Column(
         children: <Widget>[
-          Question(text: questions[questionSelected]),
-          ElevatedButton(
+          Question(text: questions[questionSelected]['text'].toString()),
+          Answer(
             onPressed: returnAnswer,
-            child: const Text('Answer 1'),
+            text: ('Answer 1'),
           ),
-          ElevatedButton(
-            onPressed: () => print(''),
-            child: const Text('Answer 2'),
-          ),
-          ElevatedButton(
+         Answer(
+          onPressed: returnAnswer,
+          text: ('Answer 2'),
+         ),
+          Answer(
             onPressed: returnAnswer,
-            child: const Text('Answer 3'),
+            text: ('Answer 3'),
           ),
         ],
       ),
