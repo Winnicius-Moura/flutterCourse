@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 main() => runApp(const QuestionsApp());
 
@@ -27,7 +28,7 @@ class QuestionsAppState extends State<QuestionsApp> {
       ),
       body: Column(
         children: <Widget>[
-          Text(questions[questionSelected]),
+          Question(text: questions[questionSelected]),
           ElevatedButton(
             onPressed: returnAnswer,
             child: const Text('Answer 1'),
