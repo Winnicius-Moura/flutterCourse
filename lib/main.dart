@@ -7,46 +7,53 @@ main() => runApp(const QuestionsApp());
 class QuestionsAppState extends State<QuestionsApp> {
   var questionSelected = 0;
 
+  final questions = const [
+    {
+      'text': 'What do you favorite color?',
+      'answer': ['Black', 'Red', 'Blue', 'Yellow'],
+    },
+    {
+      'text': 'What do you favorite animal?',
+      'answer': ['Fish', 'Rabit', 'Bat', 'Chicken'],
+    },
+    {
+      'text': 'What do you favorite Film?',
+      'answer': ['Jaws', 'Memento', 'The Godfather', 'Home Alone'],
+    },
+  ];
+
   void returnAnswer() {
     setState(() {
       questionSelected++;
     });
   }
+  
+  bool get haveQuestionSelected {
+    return questionSelected < questions.length;
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, Object>> questions = [
-      {
-        'text': 'What do you favorite color?',
-        'answer': ['Black', 'Red', 'Blue', 'Yellow'],
-      },
-      {
-        'text': 'What do you favorite animal?',
-        'answer': ['Fish', 'Rabit', 'Bat', 'Chicken'],
-      },
-      {
-        'text': 'What do you favorite Film?',
-        'answer': ['Jaws', 'Memento', 'The Godfather', 'Home Alone'],
-      },
-    ];
+    // List<Widget> answers = [];
 
-    List<Widget> answers = [];
+    // for (String textAnswer in questions[questionSelected].cast()['answer']) {
+    //   answers.add(Answer(text: textAnswer, onPressed: returnAnswer));
+    // }
 
-    for (String textAnswer in questions[questionSelected].cast()['answer']){
-      answers.add(Answer(text: textAnswer, onPressed: returnAnswer));
-    }
+    List<String> answers = haveQuestionSelected ? questions[questionSelected].cast()['answer'] : [];
 
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Questions')),
       ),
-      body: Column(
+      body: haveQuestionSelected ? Column(
         children: <Widget>[
           Question(text: questions[questionSelected]['text'].toString()),
-          ...answers,
+          ...answers.map((e) => Answer(text: e, onPressed: returnAnswer)),
         ],
-      ),
+      ) : null,
     ));
   }
 }
