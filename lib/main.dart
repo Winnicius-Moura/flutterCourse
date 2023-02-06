@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_questions/answer.dart';
 import './question.dart';
+import 'result.dart';
 
 main() => runApp(const QuestionsApp());
 
@@ -23,15 +24,16 @@ class QuestionsAppState extends State<QuestionsApp> {
   ];
 
   void returnAnswer() {
-    setState(() {
-      questionSelected++;
-    });
+    if (haveQuestionSelected) {
+      setState(() {
+        questionSelected++;
+      });
+    }
   }
-  
+
   bool get haveQuestionSelected {
     return questionSelected < questions.length;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +43,23 @@ class QuestionsAppState extends State<QuestionsApp> {
     //   answers.add(Answer(text: textAnswer, onPressed: returnAnswer));
     // }
 
-    List<String> answers = haveQuestionSelected ? questions[questionSelected].cast()['answer'] : [];
+    List<String> answers = haveQuestionSelected
+        ? questions[questionSelected].cast()['answer']
+        : [];
 
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Questions')),
       ),
-      body: haveQuestionSelected ? Column(
-        children: <Widget>[
-          Question(text: questions[questionSelected]['text'].toString()),
-          ...answers.map((e) => Answer(text: e, onPressed: returnAnswer)),
-        ],
-      ) : null,
+      body: haveQuestionSelected
+          ? Column(
+              children: <Widget>[
+                Question(text: questions[questionSelected]['text'].toString()),
+                ...answers.map((e) => Answer(text: e, onPressed: returnAnswer)),
+              ],
+            )
+          : const Result()
     ));
   }
 }
