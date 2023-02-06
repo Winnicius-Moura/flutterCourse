@@ -30,6 +30,12 @@ class QuestionsAppState extends State<QuestionsApp> {
       },
     ];
 
+    List<Widget> answers = [];
+
+    for (String textAnswer in questions[questionSelected].cast()['answer']){
+      answers.add(Answer(text: textAnswer, onPressed: returnAnswer));
+    }
+
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
@@ -38,18 +44,7 @@ class QuestionsAppState extends State<QuestionsApp> {
       body: Column(
         children: <Widget>[
           Question(text: questions[questionSelected]['text'].toString()),
-          Answer(
-            onPressed: returnAnswer,
-            text: ('Answer 1'),
-          ),
-         Answer(
-          onPressed: returnAnswer,
-          text: ('Answer 2'),
-         ),
-          Answer(
-            onPressed: returnAnswer,
-            text: ('Answer 3'),
-          ),
+          ...answers,
         ],
       ),
     ));
