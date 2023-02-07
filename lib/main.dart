@@ -47,6 +47,13 @@ class QuestionsAppState extends State<QuestionsApp> {
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      questionSelected = 0;
+      totalPoints = 0;
+    });
+  }
+
   bool get haveQuestionSelected {
     return questionSelected < questions.length;
   }
@@ -63,7 +70,10 @@ class QuestionsAppState extends State<QuestionsApp> {
                     questions: questions,
                     questionSelected: questionSelected,
                     returnAnswer: returnAnswer)
-                : Result(totalPoints: totalPoints,)));
+                : Result(
+                    totalPoints: totalPoints,
+                    restartQuiz: restartQuiz,
+                  )));
   }
 }
 

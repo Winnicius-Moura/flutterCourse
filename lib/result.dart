@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  const Result({super.key, required this.totalPoints});
+  const Result(
+      {super.key, required this.totalPoints, required this.restartQuiz});
 
   final int totalPoints;
+  final void Function() restartQuiz;
 
   String get finalResult {
-    if (totalPoints < 8){
+    if (totalPoints < 8) {
       return 'Congratulations!!!';
     } else if (totalPoints < 12) {
-      return 'You''re insane!!';
+      return 'You' 're insane!!';
     } else if (totalPoints < 16) {
       return 'Impressive!';
     } else {
@@ -19,13 +21,28 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        finalResult,
-        style: const TextStyle(
-          fontSize: 32
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Text(
+            finalResult,
+            style: const TextStyle(fontSize: 32),
+          ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: TextButton(
+            onPressed: restartQuiz,
+            child: const Text(
+              'Restart?',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
