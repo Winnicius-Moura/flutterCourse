@@ -63,7 +63,7 @@ class QuestionsAppState extends State<QuestionsApp> {
                     questions: questions,
                     questionSelected: questionSelected,
                     returnAnswer: returnAnswer)
-                : const Result()));
+                : Result(totalPoints: totalPoints,)));
   }
 }
 
