@@ -6,6 +6,7 @@ main() => runApp(const QuestionsApp());
 
 class QuestionsAppState extends State<QuestionsApp> {
   var questionSelected = 0;
+  var totalPoints = 0;
 
   final questions = const [
     {
@@ -37,10 +38,11 @@ class QuestionsAppState extends State<QuestionsApp> {
     },
   ];
 
-  void returnAnswer() {
+  void returnAnswer(int points) {
     if (haveQuestionSelected) {
       setState(() {
         questionSelected++;
+        totalPoints += points;
       });
     }
   }
