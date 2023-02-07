@@ -10,15 +10,30 @@ class QuestionsAppState extends State<QuestionsApp> {
   final questions = const [
     {
       'text': 'What do you favorite color?',
-      'answer': ['Black', 'Red', 'Blue', 'Yellow'],
+      'answer': [
+        {'text': 'Black', 'points': 2},
+        {'text': 'Red', 'points': 5},
+        {'text': 'Blue', 'points': 8},
+        {'text': 'Yellow', 'points': 9},
+      ],
     },
     {
       'text': 'What do you favorite animal?',
-      'answer': ['Fish', 'Rabit', 'Bat', 'Chicken'],
+      'answer': [
+        {'text': 'Fish', 'points': 1},
+        {'text': 'Rabit', 'points': 7},
+        {'text': 'Bat', 'points': 3},
+        {'text': 'Chicken', 'points': 4},
+      ],
     },
     {
       'text': 'What do you favorite Film?',
-      'answer': ['Jaws', 'Memento', 'The Godfather', 'Home Alone'],
+      'answer': [
+        {'text': 'Jaws', 'points': 10},
+        {'text': 'Memento', 'points': 4},
+        {'text': 'The Godfather', 'points': 2},
+        {'text': 'Home Alone', 'points': 1},
+      ],
     },
   ];
 
@@ -36,7 +51,6 @@ class QuestionsAppState extends State<QuestionsApp> {
 
   @override
   Widget build(BuildContext context) {
- 
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
