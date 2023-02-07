@@ -11,7 +11,7 @@ class Result extends StatelessWidget {
     if (totalPoints < 8) {
       return 'Congratulations!!!';
     } else if (totalPoints < 12) {
-      return 'You' 're insane!!';
+      return 'Insane!!';
     } else if (totalPoints < 16) {
       return 'Impressive!';
     } else {
